@@ -30,6 +30,13 @@ function App() {
   function handlePeopleChange({ target }) {
     if (target.value <= 200) setPeople(+target.value);
   }
+  function handleReset() {
+    setBill(0);
+    setTip(0);
+    setCustomTip(0);
+    setPeople(0);
+    setError(false);
+  }
 
   useEffect(() => {
     if ((tip || customTip) && bill && people) {
@@ -133,8 +140,11 @@ function App() {
           </div>
           <button
             className={`w-full py-3 rounded-md sm:justify-self-end ${
-              totalTip ? "bg-primary" : "bg-white opacity-20"
+              bill || tip || customTip || people
+                ? "bg-primary"
+                : "bg-white opacity-20"
             }`}
+            onClick={handleReset}
           >
             Reset
           </button>
