@@ -28,10 +28,9 @@ function App() {
   }
 
   function handlePeopleChange({ target }) {
-    if (target.value.match(/\b\d+\b/)) console.log(typeof target.value);
-    console.log(target.value.match(/-/));
-    setPeople(+target.value);
+    if (target.value <= 200) setPeople(+target.value);
   }
+
   useEffect(() => {
     if ((tip || customTip) && bill && people) {
       const tipAmount = ((bill * (tip || customTip)) / 100).toFixed(2);
