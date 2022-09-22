@@ -51,7 +51,7 @@ function App() {
           TTER
         </h1>
       </header>
-      <main className="bg-white h-[80vh] p-8 rounded-t-3xl max-w-4xl sm:flex sm:h-[70vh] sm:justify-between sm:m-auto sm:gap-5 sm:rounded-3xl">
+      <main className="bg-white h-[80vh] p-8 rounded-t-3xl max-w-4xl max-h-[600px] sm:flex sm:h-[70vh] sm:justify-between sm:m-auto sm:gap-5 sm:rounded-3xl">
         <section className="sm:w-[50%] sm:flex sm:flex-col sm:justify-between">
           <div>
             <h2 className="mb-2">Bill</h2>
