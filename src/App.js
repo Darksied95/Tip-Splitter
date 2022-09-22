@@ -10,8 +10,10 @@ function App() {
 
   const tipPercentage = [5, 10, 15, 25, 50];
   function handleCustomTip({ target }) {
-    setTip(0);
-    setCustomTip(+target.value);
+    if (+target.value <= 1000) {
+      setTip(0);
+      setCustomTip(+target.value);
+    }
   }
 
   function handleTipChange({ target }) {
@@ -19,6 +21,17 @@ function App() {
     setTip(+target.value);
   }
 
+  function handleBillChange({ target }) {
+    if (target.value.length <= 6) {
+      setBill(+target.value);
+    }
+  }
+
+  function handlePeopleChange({ target }) {
+    if (target.value.match(/\b\d+\b/)) console.log(typeof target.value);
+    console.log(target.value.match(/-/));
+    setPeople(+target.value);
+  }
   useEffect(() => {
     if ((tip || customTip) && bill && people) {
       const tipAmount = ((bill * (tip || customTip)) / 100).toFixed(2);
@@ -47,7 +60,7 @@ function App() {
               type={"number"}
               placeholder={`0.00`}
               value={bill ? bill : ""}
-              onChange={({ target }) => setBill(target.value)}
+              onChange={handleBillChange}
               className="bg-vlgc bg-[url('./assets/icon-dollar.svg')]
                bg-no-repeat p-2 w-full text-right bg-[center_left_.5rem] text-xl mb-5 text-vdc
                placeholder:text-vdc"
@@ -82,7 +95,7 @@ function App() {
               <h3 className="flex justify-between">
                 <span> Number of people </span>
                 <span className={error ? "block text-red-600" : "hidden"}>
-                  Can't be zero
+                  Can't be less than 1
                 </span>
               </h3>
               <input
@@ -90,8 +103,10 @@ function App() {
                 placeholder="0"
                 value={people ? people : ""}
                 min={0}
-                onBlur={people === 0 ? () => setError(true) : null}
-                onChange={({ target }) => setPeople(target.value)}
+                onBlur={
+                  people <= 0 ? () => setError(true) : () => setError(false)
+                }
+                onChange={handlePeopleChange}
                 className={`bg-vlgc bg-[url('./assets/icon-person.svg')]
              bg-no-repeat p-2 w-full text-right bg-[center_left_.5rem] text-xl mb-5 text-vdc placeholder:text-vdc ${
                error ? "border border-red-600" : null
